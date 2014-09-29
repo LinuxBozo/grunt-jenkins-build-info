@@ -1,0 +1,10 @@
+{
+  "name": "grunt-jenkins-build-info",
+  "version": "0.0.1",
+  "build": {
+    "number": "foo",
+    "svnRevision": "bar",
+    "gitRevision": "baz",
+    "gitBranch": "develop"
+  }
+}
