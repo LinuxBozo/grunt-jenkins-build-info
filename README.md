@@ -33,7 +33,7 @@ grunt.initConfig({
 ```
 
 ### Output
-When using outside of Jenkins, this plugin doesn't do much.
+When using outside of Jenkins, this plugin doesn't do much. Where this plugin shines, is when used during a Jenkins build, and using either the Jenkins SVN or GIT plugins.
 
 ```json
 {
