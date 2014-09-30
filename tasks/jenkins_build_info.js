@@ -18,7 +18,9 @@ module.exports = function (grunt) {
     var svnRevision = process.env.SVN_REVISION || null;
     var gitRevision = process.env.GIT_COMMIT || null;
     var gitBranch = process.env.GIT_BRANCH || null;
-    var jenkinsBuild = process.env.BUILD_NUMBER || null;
+    var jenkinsBuildNumber = process.env.BUILD_NUMBER || null;
+    var jenkinsJobUrl = process.env.JOB_URL || null;
+    var jenkinsBuildTag = process.env.BUILD_TAG || null;
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
@@ -34,9 +36,17 @@ module.exports = function (grunt) {
       var src = grunt.file.readJSON(file);
 
       src.build = {};
-      if (jenkinsBuild) {
+      if (jenkinsBuildNumber) {
         console.log("Setting build number...");
-        src.build.number = jenkinsBuild;
+        src.build.number = jenkinsBuildNumber;
+      }
+      if (jenkinsBuildTag) {
+        console.log("Setting build tag...");
+        src.build.tag = jenkinsBuildTag;
+      }
+      if (jenkinsJobUrl) {
+        console.log("Setting job url...");
+        src.build.url = jenkinsJobUrl;
       }
       if (svnRevision !== null) {
         console.log("Setting svn revision...");
