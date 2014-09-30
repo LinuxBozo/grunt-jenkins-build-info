@@ -15,13 +15,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('jenkins_build_info', 'Adds Jenkins build information, including source control info,  to defined json (package, bower, etc)', function () {
 
-    console.log('loading options');
+    var svnRevision = process.env.SVN_REVISION || null;
+    var gitRevision = process.env.GIT_COMMIT || null;
+    var gitBranch = process.env.GIT_BRANCH || null;
+    var jenkinsBuild = process.env.BUILD_NUMBER || null;
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      svnRevision: process.env.SVN_REVISION || null,
-      gitRevision: process.env.GIT_COMMIT || null,
-      gitBranch: process.env.GIT_BRANCH || null,
-      jenkinsBuild: process.env.BUILD_NUMBER || "Local Build",
       files: []
     });
 
@@ -34,16 +34,21 @@ module.exports = function (grunt) {
       var src = grunt.file.readJSON(file);
 
       src.build = {};
-      src.build.number = options.jenkinsBuild;
-
-      if (options.svnRevision !== null) {
-        src.build.svnRevision = options.svnRevision;
+      if (jenkinsBuild) {
+        console.log("Setting build number...");
+        src.build.number = jenkinsBuild;
       }
-      if (options.gitRevision !== null) {
-        src.build.gitRevision = options.gitRevision;
+      if (svnRevision !== null) {
+        console.log("Setting svn revision...");
+        src.build.svnRevision = svnRevision;
       }
-      if (options.gitBranch !== null) {
-        src.build.gitBranch = options.gitBranch;
+      if (gitRevision !== null) {
+        console.log("Setting git revision...");
+        src.build.gitRevision = gitRevision;
+      }
+      if (gitBranch !== null) {
+        console.log("Setting git branch...");
+        src.build.gitBranch = gitBranch;
       }
 
       grunt.file.write(file, JSON.stringify(src, null, 2));

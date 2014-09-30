@@ -66,7 +66,8 @@ This shows example output when Jenkins, and git for version control
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_0.0.1_  - Initial release
+_0.0.2_ - Clean up some of the process.env parsing
+_0.0.1_ - Initial release
 
 ## License
 Copyright (c) 2014 M. Adam Kendall. Licensed under the MIT license.

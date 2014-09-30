@@ -8,10 +8,10 @@
 
 'use strict';
 
-process.env.BUILD_NUMBER = "foo";
-process.env.SVN_REVISION = "bar";
-process.env.GIT_COMMIT = "baz";
-process.env.GIT_BRANCH = "develop";
+process.env.BUILD_NUMBER = process.env.BUILD_NUMBER ? process.env.BUILD_NUMBER : "foo";
+process.env.SVN_REVISION = process.env.SVN_REVISION ? process.env.SVN_REVISION : "bar";
+process.env.GIT_COMMIT = process.env.GIT_COMMIT ? process.env.GIT_COMMIT : "baz";
+process.env.GIT_BRANCH = process.env.GIT_BRANCH ? process.env.GIT_BRANCH : "develop";
 
 module.exports = function (grunt) {
   // load all npm grunt tasks

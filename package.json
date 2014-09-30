@@ -1,6 +1,6 @@
 {
   "name": "grunt-jenkins-build-info",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Adds Jenkins build information, including source control info,  to defined json (package, bower, etc)",
   "homepage": "https://github.com/linuxbozo/grunt-jenkins-build-info",
   "repository": "https://github.com/linuxbozo/grunt-jenkins-build-info",
