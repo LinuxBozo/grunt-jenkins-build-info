@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "build": {
     "number": "foo",
+    "tag": "tag",
+    "url": "http://example.org",
     "svnRevision": "bar",
     "gitRevision": "baz",
     "gitBranch": "develop"

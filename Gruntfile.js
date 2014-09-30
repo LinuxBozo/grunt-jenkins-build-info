@@ -9,6 +9,8 @@
 'use strict';
 
 process.env.BUILD_NUMBER = process.env.BUILD_NUMBER ? process.env.BUILD_NUMBER : "foo";
+process.env.BUILD_TAG = process.env.BUILD_TAG ? process.env.BUILD_TAG : "tag";
+process.env.JOB_URL = process.env.JOB_URL ? process.env.JOB_URL : "http://example.org";
 process.env.SVN_REVISION = process.env.SVN_REVISION ? process.env.SVN_REVISION : "bar";
 process.env.GIT_COMMIT = process.env.GIT_COMMIT ? process.env.GIT_COMMIT : "baz";
 process.env.GIT_BRANCH = process.env.GIT_BRANCH ? process.env.GIT_BRANCH : "develop";
