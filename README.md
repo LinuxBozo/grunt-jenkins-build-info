@@ -25,9 +25,26 @@ In your project's Gruntfile, add a section named `jenkins_build_info` to the dat
 ```js
 grunt.initConfig({
   jenkins_build_info: {
-    options: {
-      files: ['package.json'] // list of files to add build info
-    },
+    main: {
+        options: {
+          files: ['package.json'] // list of files to add build info
+        },
+    }
+  },
+})
+```
+
+By default, the build information will be added under a 'build' field in the JSON.  However, 'build' is a future reserved field for npm package.json.  For backward compatibility, it is retained as the default, however you can specified your own field name with the buildField options:
+
+```js
+grunt.initConfig({
+  jenkins_build_info: {
+    main: {
+        options: {
+          files: ['package.json'] // list of files to add build info,
+          buildField: 'buildInfo' // add a 'buildInfo' element to the package.json containing the build info
+        },
+    }
   },
 })
 ```
@@ -66,6 +83,7 @@ This shows example output when Jenkins, and git for version control
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+_0.1.0_ - Made multitask, and added option of specifying the field the build information is added to.
 _0.0.3_ - Add the job url and build tag
 _0.0.2_ - Clean up some of the process.env parsing
 _0.0.1_ - Initial release

@@ -30,9 +30,18 @@ exports.jenkins_build_info = {
   with_env: function (test) {
     test.expect(1);
 
-    var actual = grunt.file.read('test/actual/test.json');
+    var actual = grunt.file.read('tmp/test.json');
     var expected = grunt.file.read('test/expected/test_default.json');
     test.equal(actual, expected, 'should describe what the default behavior is.');
+
+    test.done();
+  },
+  with_custom: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/test_custom.json');
+    var expected = grunt.file.read('test/expected/test_custom.json');
+    test.equal(actual, expected, 'should describe what the custom field behavior is.');
 
     test.done();
   }
