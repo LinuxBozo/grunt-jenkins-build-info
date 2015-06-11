@@ -38,13 +38,29 @@ module.exports = function (grunt) {
       tests: ['tmp']
     },
 
+    copy: {
+      tests: {
+        files: [{expand: true, flatten:true, src: ['test/actual/*'], dest: 'tmp/', filter: 'isFile'},]
+      }
+    },
+
 
     // Configuration to be run (and then tested).
     jenkins_build_info: {
-      options: {
-        files: ['test/actual/test.json']
+      main: {
+        options: {
+          files: ['tmp/test.json']
+        },
       },
+      custom: {
+        options: {
+          files: ['tmp/test_custom.json'],
+          buildField: 'buildInfo'
+        }
+      }
     },
+
+
 
     // Unit tests.
     nodeunit: {
@@ -58,7 +74,7 @@ module.exports = function (grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'jenkins_build_info', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'copy', 'jenkins_build_info:main', 'jenkins_build_info:custom', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

@@ -13,7 +13,7 @@ module.exports = function (grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerTask('jenkins_build_info', 'Adds Jenkins build information, including source control info,  to defined json (package, bower, etc)', function () {
+  grunt.registerMultiTask('jenkins_build_info', 'Adds Jenkins build information, including source control info,  to defined json (package, bower, etc)', function () {
 
     var svnRevision = process.env.SVN_REVISION || null;
     var gitRevision = process.env.GIT_COMMIT || null;
@@ -22,10 +22,13 @@ module.exports = function (grunt) {
     var jenkinsJobUrl = process.env.JOB_URL || null;
     var jenkinsBuildTag = process.env.BUILD_TAG || null;
 
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      files: []
+      files: [],
+      buildField: "build"
     });
+    var buildField = options.buildField;
 
     // Iterate over all specified file groups.
     options.files.forEach(function (file, idx) {
@@ -35,30 +38,30 @@ module.exports = function (grunt) {
       }
       var src = grunt.file.readJSON(file);
 
-      src.build = {};
+      src[buildField] = {};
       if (jenkinsBuildNumber) {
         console.log("Setting build number...");
-        src.build.number = jenkinsBuildNumber;
+        src[buildField].number = jenkinsBuildNumber;
       }
       if (jenkinsBuildTag) {
         console.log("Setting build tag...");
-        src.build.tag = jenkinsBuildTag;
+        src[buildField].tag = jenkinsBuildTag;
       }
       if (jenkinsJobUrl) {
         console.log("Setting job url...");
-        src.build.url = jenkinsJobUrl;
+        src[buildField].url = jenkinsJobUrl;
       }
       if (svnRevision !== null) {
         console.log("Setting svn revision...");
-        src.build.svnRevision = svnRevision;
+        src[buildField].svnRevision = svnRevision;
       }
       if (gitRevision !== null) {
         console.log("Setting git revision...");
-        src.build.gitRevision = gitRevision;
+        src[buildField].gitRevision = gitRevision;
       }
       if (gitBranch !== null) {
         console.log("Setting git branch...");
-        src.build.gitBranch = gitBranch;
+        src[buildField].gitBranch = gitBranch;
       }
 
       grunt.file.write(file, JSON.stringify(src, null, 2));
